@@ -45,7 +45,7 @@ jobs:
           context: ./
           push: true
           tags: |
-            ${{ vars.DOCKER_REGISTRY }}/${{ vars.DOCKER_NAMESPACE }}/guance-cpp-demo:${{ github.sha }}
-            ${{ vars.DOCKER_REGISTRY }}/${{ vars.DOCKER_NAMESPACE }}/guance-cpp-demo:latest
+            ${{ vars.DOCKER_NAMESPACE }}/guance-cpp-demo:${{ github.sha }}
+            ${{ vars.DOCKER_NAMESPACE }}/guance-cpp-demo:latest
           cache-from: type=gha
           cache-to: type=gha
