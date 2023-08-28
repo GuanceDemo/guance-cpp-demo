@@ -5,6 +5,17 @@
 
 ## 方式一：Helm 方式安装
 > 通过 Helm 安装至 Kubernetes 集群，适合快速安装 guance-cpp-demo 进行演示的场景。
+### 1. 安装
+```shell
+git clone https://github.com/GuanceDemo/guance-cpp-demo.git
+cd guance-cpp-demo/deployment/helm
+helm upgrade -i --create-namespace guance-cpp-demo . -n cpp-demo
+kubectl get pod -n cpp-demo
+```
+### 2. 卸载
+```shell
+helm uninstall guance-cpp-demo -n cpp-demo
+```
 
 
 ## 方式二：自动安装
@@ -24,7 +35,6 @@
 - 安装依赖库
 ```shell
 # ubuntu
-sudo apt-get install pkg-config
 sudo apt-get install build-essential autoconf libtool pkg-config
 sudo apt-get install libgflags-dev libgtest-dev
 sudo apt-get install clang libc++-dev
@@ -45,7 +55,8 @@ cd grpc/
 git submodule update --init
 # install protobuf
 cd third_party/protobuf
-./autogen.sh 
+./autogen.sh
+./configure
 make -j
 make install
 ldconfig
@@ -72,7 +83,7 @@ make install
 wget https://curl.haxx.se/download/curl-7.81.0.tar.bz2
 tar xjf curl-7.81.0.tar.bz2
 cd curl-7.81.0
-./configure 
+./configure --without-ssl
 make
 make install
 ```
@@ -86,6 +97,9 @@ git clone --recurse-submodules https://github.com/open-telemetry/opentelemetry-c
 
 #### 3.2 编译 opentelemetry-cpp
 ```shell
+cd opentelemetry-cpp
+mkdir build
+cd build
 cmake -DBUILD_TESTING=OFF -DWITH_OTLP_GRPC=ON -DWITH_OTLP_HTTP=ON ..
 ```
 > gRPC 和 HTTP 协议，可根据实际场景二选一

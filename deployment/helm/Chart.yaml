@@ -1,0 +1,11 @@
+apiVersion: v2
+name: guance-cpp-demo
+description: C++ Demo for Guance
+type: application
+version: "v1.0"
+appVersion: "v1.0"
+maintainers:
+  - email: huangxiaolong@guance.com
+    name: huangxiaolong
+sources:
+  - https://github.com/GuanceDemo/guance-cpp-demo

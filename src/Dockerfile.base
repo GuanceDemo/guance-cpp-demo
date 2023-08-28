@@ -1,0 +1,39 @@
+FROM ubuntu:20.04
+MAINTAINER Guance
+
+ARG GRPC_VERSION=v1.40.0
+ARG OTEL_GIT_TAG=v1.11.0
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update
+RUN apt-get install -y cmake git wget \
+    && apt-get install -y build-essential autoconf libtool pkg-config \
+    && apt-get install -y libgflags-dev libgtest-dev \
+    && apt-get install -y clang libc++-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# install grpc
+RUN git clone -b $GRPC_VERSION https://github.com/grpc/grpc.git \
+    && cd grpc && git submodule update --init && cd third_party/protobuf \
+    && ./autogen.sh && ./configure && make -j4 && make install && ldconfig \
+    && cd ../abseil-cpp && mkdir build && cd build && cmake .. && make -j4 && make install \
+    && cd ../../../ && mkdir build && cd build && cmake .. && make -j4 && make install \
+    && cd ../../ && rm -rf grpc
+
+# install CURL
+RUN wget https://curl.haxx.se/download/curl-7.81.0.tar.bz2 && tar xjf curl-7.81.0.tar.bz2 \
+    && cd curl-7.81.0 && ./configure --without-ssl && make -j4 && make install \
+    && cd ../ && rm -rf curl-7.81.0.tar.bz2
+
+# install opentelemetry-cpp
+RUN git clone --recurse-submodules -b $OTEL_GIT_TAG https://github.com/open-telemetry/opentelemetry-cpp \
+    && cd opentelemetry-cpp && mkdir build && cd build \
+    && cmake \
+        -DBUILD_TESTING=OFF \
+        -DWITH_OTLP_GRPC=ON \
+        -DWITH_OTLP_HTTP=ON \
+        .. \
+    && cmake --build . --target all \
+    && cmake --install . --prefix /usr/local \
+    && cd ../../ && rm -rf opentelemetry-cpp
+

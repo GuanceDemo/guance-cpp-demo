@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: guance-cpp-demo
+  namespace: cpp-demo
+  labels:
+    app: guance-cpp-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: guance-cpp-demo
+  template:
+    metadata:
+      labels:
+        app: guance-cpp-demo
+    spec:
+      containers:
+        - env:
+            - name: OTEL_GRPC_EXPORTER
+              value: "datakit-service.datakit:4317"
+            - name: OTEL_HTTP_EXPORTER
+              value: "http://datakit-service.datakit:9529/otel/v1/trace"
+          name: guance-cpp-demo
+          image: pubrepo.guance.com/demo/guance-cpp-demo:{{ .Values.global.version }}
+          imagePullPolicy: IfNotPresent
