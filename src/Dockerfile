@@ -18,4 +18,4 @@ RUN mkdir build && cd build  \
       .. \
     && make
 
-ENTRYPOINT ["sh", "-c", "${workdir}start.sh"]
+ENTRYPOINT ["sh", "-c", "${workdir}/start.sh"]
