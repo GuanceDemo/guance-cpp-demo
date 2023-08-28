@@ -42,7 +42,7 @@ jobs:
         with:
           file: ./src/Dockerfile
           platforms: linux/amd64,linux/arm64
-          context: ./
+          context: .
           push: true
           tags: |
             ${{ vars.DOCKER_NAMESPACE }}/guance-cpp-demo:${{ github.sha }}
