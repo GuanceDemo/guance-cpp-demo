@@ -40,6 +40,7 @@ jobs:
       - name: Build and push demo images
         uses: docker/build-push-action@v3.3.1
         with:
+          registry: ${{ vars.DOCKER_REGISTRY }}
           file: ./src/Dockerfile
           platforms: linux/amd64,linux/arm64
           context: ./src/
