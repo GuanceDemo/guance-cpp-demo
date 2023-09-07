@@ -20,7 +20,7 @@ spec:
             - name: OTEL_GRPC_EXPORTER
               value: "datakit-service.datakit:4317"
             - name: OTEL_HTTP_EXPORTER
-              value: "http://datakit-service.datakit:9529/otel/v1/trace"
+              value: "http://datakit-service.datakit:9529/otel/v1/traces"
           name: guance-cpp-demo
           image: pubrepo.guance.com/demo/guance-cpp-demo:{{ .Values.global.version }}
           imagePullPolicy: IfNotPresent
