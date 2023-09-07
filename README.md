@@ -65,7 +65,7 @@ New repository Variable
 通过手动执行以下流水线进行卸载。
 - `Uninstall cpp demo on kubernetes`: 从 Kubernetes 集群删除
 
-
+***
 
 ## 方式三：编译安装
 > 本地编译代码执行，熟悉 C++ 应用通过 Opentelemetry 接入观测云。
@@ -90,7 +90,6 @@ sudo apt-get install clang libc++-dev
 yum install -y gcc-c++ autoconf libtool
 yum groupinstall -y "Development Tools"
 ```
-
 
 - 源码编译安装
 
@@ -122,7 +121,6 @@ make
 make install
 ```
 
-
 #### 2.2 通过 HTTP 协议上传数据需安装 libcurl
 ```shell
 wget https://curl.haxx.se/download/curl-7.81.0.tar.bz2
@@ -132,7 +130,6 @@ cd curl-7.81.0
 make
 make install
 ```
-
 
 ### 3. 安装 opentelemetry-cpp
 #### 3.1 下载 opentelemetry-cpp
