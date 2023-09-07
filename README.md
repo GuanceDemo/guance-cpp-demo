@@ -26,7 +26,7 @@ helm uninstall guance-cpp-demo -n cpp-demo
 
 ***
 
-## 方式二：自动安装
+## 方式二：自动打包部署
 > 通过 Github Action 自动打包并安装至 Kubernetes 集群，适合编译 guance-cpp-demo 源码进行演示的场景。
 
 ### 1. fork 代码到自己的 Github 仓库
