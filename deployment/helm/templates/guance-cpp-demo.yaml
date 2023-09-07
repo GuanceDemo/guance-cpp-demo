@@ -23,4 +23,4 @@ spec:
               value: "http://datakit-service.datakit:9529/otel/v1/traces"
           name: guance-cpp-demo
           image: pubrepo.guance.com/demo/guance-cpp-demo:{{ .Values.global.version }}
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
