@@ -1,15 +1,17 @@
 # guance-cpp-demo
+[观测云](https://www.guance.com/)是一款旨在解决云计算，以及云原生时代系统为每一个完整的应用构建全链路的可观测性的云服务平台。本项目通过 OpenTelemetry 接入 C++ 应用，让您快速了解接入观测云的流程和功能。
+
 > 项目来源：[opentelemetry cpp examples](https://github.com/open-telemetry/opentelemetry-cpp/tree/main/examples/otlp)
 
-
+***
 
 ## 方式一：Helm 方式安装
 > 通过 Helm 安装至 Kubernetes 集群，适合快速安装 guance-cpp-demo 进行演示的场景。
 ### 1. 安装
 ```shell
 git clone https://github.com/GuanceDemo/guance-cpp-demo.git
-cd guance-cpp-demo/deployment/helm
-helm upgrade -i --create-namespace guance-cpp-demo . -n cpp-demo
+cd guance-cpp-demo/
+helm upgrade -i --create-namespace guance-cpp-demo -n cpp-demo ./deployment/helm
 kubectl get pod -n cpp-demo
 ```
 ### 2. 卸载
@@ -17,6 +19,7 @@ kubectl get pod -n cpp-demo
 helm uninstall guance-cpp-demo -n cpp-demo
 ```
 
+***
 
 ## 方式二：自动安装
 > 通过 Github Action 自动打包并安装至 Kubernetes 集群，适合编译 guance-cpp-demo 源码进行演示的场景。

@@ -29,7 +29,7 @@ namespace
         auto processor = trace_sdk::SimpleSpanProcessorFactory::Create(std::move(exporter));
 
         resource::ResourceAttributes attributes = {
-                {resource::SemanticConventions::kServiceName, "guance-cpp-otel-grpc-exporter-demo"}
+                {resource::SemanticConventions::kServiceName, "cpp-otel-grpc-exporter-demo"}
         };
         auto resource = opentelemetry::sdk::resource::Resource::Create(attributes);
 

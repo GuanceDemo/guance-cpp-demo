@@ -33,7 +33,7 @@ namespace
         auto exporter  = otlp::OtlpHttpExporterFactory::Create(opts);
         auto processor = trace_sdk::SimpleSpanProcessorFactory::Create(std::move(exporter));
         resource::ResourceAttributes attributes = {
-                {resource::SemanticConventions::kServiceName, "guance-cpp-otel-http-exporter-demo"}
+                {resource::SemanticConventions::kServiceName, "cpp-otel-http-exporter-demo"}
         };
         auto resource = opentelemetry::sdk::resource::Resource::Create(attributes);
 
