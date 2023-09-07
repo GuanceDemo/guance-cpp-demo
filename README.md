@@ -5,6 +5,11 @@
 
 ***
 
+## 前提条件
+[安装 DataKit Operator 和 DataKit](https://github.com/GuanceDemo/guance-datakit-demo)
+
+***
+
 ## 方式一：Helm 方式安装
 > 通过 Helm 安装至 Kubernetes 集群，适合快速安装 guance-cpp-demo 进行演示的场景。
 ### 1. 安装
@@ -23,6 +28,43 @@ helm uninstall guance-cpp-demo -n cpp-demo
 
 ## 方式二：自动安装
 > 通过 Github Action 自动打包并安装至 Kubernetes 集群，适合编译 guance-cpp-demo 源码进行演示的场景。
+
+### 1. fork 代码到自己的 Github 仓库
+
+### 2. 创建并添加以下密钥和变量
+> 创建路径：Settings --> Secrets and Variables --> Action
+
+New repository Secret
+- `KUBECONFIG`: Kubernetes config文件，用于 Action 执行机远程操作 Kubernetes 集群
+- `DOCKER_USERNAME`: 镜像仓库登陆用户名
+- `DOCKER_PASSWORD`: 镜像仓库登陆密码
+- `GUANCE_ACCESS_TOKEN`: 观测云 Key ID，创建方式：[API Key](https://docs.guance.com/management/api-key/)
+
+New repository Variable
+- `DOCKER_REGISTRY`: 镜像仓库地址，如 pubrepo.guance.com
+- `DOCKER_NAMESPACE`: 镜像仓库项目名，如 demo
+- `GUANCE_REGION`: 观测云 region，可选项：[terraform-provider-guance](https://github.com/GuanceCloud/terraform-provider-guance)
+
+> 配置后镜像地址：$DOCKER_REGISTRY/$DOCKER_NAMESPACE/demo:latest
+
+
+### 3. 触发自动打包流水线
+> 手动触发路径：Action --> Build and push cpp demo images --> Run Workflow
+
+自动打包流水线会自动打包该项目镜像并上传至镜像仓库, 可通过修改 src 下任意文件或手动方式进行触发。
+
+- `Build and push cpp demo images`: 前端 CI 流水线
+
+### 4. 触发自动部署流水线
+> 手动触发路径：Action --> Deploy cpp demo on kubernetes --> Run Workflow
+
+自动部署流水线通过手动触发进行部署。
+- `Deploy cpp demo on kubernetes`: CD 流水线
+
+### 5. 卸载
+通过手动执行以下流水线进行卸载。
+- `Uninstall cpp demo on kubernetes`: 从 Kubernetes 集群删除
+
 
 
 ## 方式三：编译安装
